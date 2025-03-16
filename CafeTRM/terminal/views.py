@@ -10,6 +10,14 @@ from decimal import Decimal
 from django.db.models import Q
 
 class OrderCreateView(CreateView):
+    """
+    Представление для создание ордера
+
+    Возвращает:
+        Контекст - возвращете данные из баз по столам и статусам
+        Форму для создание ордера
+
+    """
     model = Order
     form_class = OrderForm
     template_name = 'terminal/create_order.html'
@@ -45,6 +53,13 @@ class OrderCreateView(CreateView):
             return self.render_to_response(self.get_context_data(form=form))
 
 class OrderUpdateView(UpdateView):
+    """
+        Представление для редоктирование ордера
+
+        Возвращает:
+            Контекст - данные по объекту по id
+            Форму для обновления заказа
+    """
     model = Order
     form_class = OrderForm
     template_name = 'terminal/update_order.html'
@@ -72,16 +87,35 @@ class OrderUpdateView(UpdateView):
             return self.render_to_response(self.get_context_data(form=form))
 
 class OrderDeleteView(DeleteView):
+    """
+            Представление для удаления ордера
+
+    """
     model = Order
     template_name = 'terminal/delete_order.html'
     success_url = reverse_lazy('order_list')
 
 class OrderListView(ListView):
+    """
+        Представление для удаления ордера
+
+        Возвращает:
+            Контекст - сформерованый по запросу utm
+
+
+    """
     model = Order
     template_name = 'terminal/order_list.html'
     context_object_name = 'orders'
 
     def get_queryset(self):
+        """
+             Подготовка данных по фильтрации
+
+             Возвращает:
+                Фильтрацию или по num заказа, столу, статусу
+
+        """
         queryset = super().get_queryset()
 
 
@@ -137,6 +171,15 @@ class OrderListView(ListView):
 
 
 class IncomeByDayView(TemplateView):
+    """
+            Представление для сметы по дням
+
+            Возвращает:
+                Контекст - сформерованый отчет дохода по каждому дню
+
+
+        """
+
     template_name = 'terminal/income_by_day.html'
 
     def get_context_data(self, **kwargs):
