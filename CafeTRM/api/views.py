@@ -1,5 +1,5 @@
 from rest_framework import viewsets
-from .models import Order, OrderDish, Dish, Table, OrderStatus
+from terminal.models import Order, OrderDish, Dish, Table, OrderStatus
 from .serializers import OrderSerializer, DishSerializer, TableSerializer, OrderStatusSerializer
 
 class DishViewSet(viewsets.ModelViewSet):
