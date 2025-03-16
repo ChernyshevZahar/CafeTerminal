@@ -38,7 +38,7 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
 
-    'CafeTRM.terminal.apps.TerminalConfig',
+    'terminal.apps.TerminalConfig',
 ]
 
 MIDDLEWARE = [
