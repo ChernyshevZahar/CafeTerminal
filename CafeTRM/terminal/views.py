@@ -8,6 +8,7 @@ from django.utils import timezone
 from decimal import Decimal
 
 from django.db.models import Q
+from django.contrib import messages
 
 class OrderCreateView(CreateView):
     """
@@ -132,7 +133,7 @@ class OrderListView(ListView):
                 order_id = int(order_id)
                 filters &= Q(num=order_id)
             except ValueError:
-                pass
+                messages.warning(self.request, "Номер заказа должен быть числом.")
 
         # Фильтрация по столу
         if table_id:
@@ -140,7 +141,7 @@ class OrderListView(ListView):
                 table_id = int(table_id)
                 filters &= Q(table_id=table_id)
             except ValueError:
-                pass
+                messages.warning(self.request, "Нет такого стола")
 
         # Фильтрация по статусу
         if status_id:
@@ -148,7 +149,7 @@ class OrderListView(ListView):
                 status_id = int(status_id)
                 filters &= Q(status_id=status_id)
             except ValueError:
-                pass
+                messages.warning(self.request, "Нет такого статуса")
 
 
         queryset = queryset.filter(filters)
