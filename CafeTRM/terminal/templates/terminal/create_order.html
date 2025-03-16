@@ -1,0 +1,55 @@
+{% extends "terminal/base.html" %}
+
+{% block title %}
+<title>Создание заказа</title>
+
+{% endblock%}
+
+
+
+{% block body %}
+<div class="container mt-5">
+    <h1 class="mb-4">Создание нового заказа</h1>
+    <form method="post" class="needs-validation" novalidate>
+        {% csrf_token %}
+
+         <div class="mb-3">
+            <label for="id_table" class="form-label">Выберите стол:</label>
+            <select name="table" id="id_table" class="form-control">
+                {% for table in tables %}
+                    <option value="{{ table.id }}">{{ table.number }}</option>
+                {% endfor %}
+            </select>
+        </div>
+
+          <div class="mb-3">
+            <label for="id_status" class="form-label">Выберите статус:</label>
+            <select name="status" id="id_status" class="form-control">
+                {% for status in statuses %}
+                    <option value="{{ status.id }}">{{ status.name }}</option>
+                {% endfor %}
+            </select>
+        </div>
+
+        <!-- Поле для выбора блюд и количества -->
+        <div class="mb-3">
+            <label class="form-label">Выберите блюда и укажите количество:</label>
+            {{ formset.management_form }}
+            <div id="dishes-formset">
+                {% for form in formset %}
+                    <div class="dish-form mb-2">
+                        {{ form.as_table }}
+                    </div>
+                {% endfor %}
+            </div>
+
+        </div>
+
+        <!-- Кнопка отправки формы -->
+        <button type="submit" class="btn btn-primary">Создать заказ</button>
+    </form>
+    <a href="{% url 'order_list' %}" class="btn btn-secondary">Назад</a>
+</div>
+
+
+{% endblock %}

@@ -1,0 +1,36 @@
+{% extends "terminal/base.html" %}
+
+{% block title %}
+<title>Доход по дням</title>
+
+{% endblock%}
+
+
+
+
+{% block body %}
+<div class="container mt-5">
+    <h1 class="mb-4">Доход по дням</h1>
+
+    <!-- Таблица с доходом по дням -->
+    <table class="table table-striped table-hover">
+        <thead class="table-dark">
+            <tr>
+                <th>Дата</th>
+                <th>Доход</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for day, income in income_by_day %}
+            <tr>
+                <td>{{ day }}</td>
+                <td>{{ income }} руб.</td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+
+    <!-- Кнопка для возврата на главную страницу -->
+    <a href="{% url 'order_list' %}" class="btn btn-secondary">Назад к списку заказов</a>
+</div>
+{% endblock %}
