@@ -40,6 +40,8 @@ INSTALLED_APPS = [
 
     'terminal.apps.TerminalConfig',
     'api.apps.ApiConfig',
+
+    'rest_framework',
 ]
 
 MIDDLEWARE = [
