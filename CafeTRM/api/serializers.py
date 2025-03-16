@@ -24,6 +24,7 @@ class OrderDishSerializer(serializers.ModelSerializer):
         fields = '__all__'
 
 
+
 class OrderSerializer(serializers.ModelSerializer):
     dishes = OrderDishSerializer(source='order_dishes', many=True)
     table = TableSerializer(read_only=True)
